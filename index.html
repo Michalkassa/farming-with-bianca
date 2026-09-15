@@ -10,9 +10,9 @@
 		<title>Farming with Bianca</title>
 		<style>
 @font-face {
-	font-family: "Fredoka";
-	src: url("Fredoka.ttf") format("truetype");
-	font-weight: 300 700;
+	font-family: "Monocraft";
+	src: url("Monocraft.ttf") format("truetype");
+	font-weight: 400;
 	font-display: swap;
 }
 
@@ -40,7 +40,7 @@ html, body {
 
 body {
 	color: var(--text);
-	font-family: "Fredoka", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	font-family: "Monocraft", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 	touch-action: none;
 	-webkit-user-select: none;
 	user-select: none;
@@ -89,8 +89,8 @@ body {
 }
 
 #status-title {
-	font-size: 34px;
-	font-weight: 600;
+	font-size: 28px;
+	font-weight: 400;
 	letter-spacing: 0.04em;
 	color: var(--gold);
 	text-shadow: 0 2px 0 #000;
@@ -98,17 +98,17 @@ body {
 
 #status-bar {
 	width: min(60vw, 320px);
-	height: 18px;
-	background: var(--panel);
-	border: 3px solid var(--wood);
-	border-radius: 6px;
+	height: 20px;
+	background: #000;
+	border: 3px solid #fff;
+	outline: 3px solid #000;
 	overflow: hidden;
 }
 
 #status-fill {
 	width: 0%;
 	height: 100%;
-	background: linear-gradient(180deg, #ffe38f, #d59a3c);
+	background: #6fc24a;
 	transition: width 0.15s linear;
 }
 
@@ -244,7 +244,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":389444,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":313192,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
