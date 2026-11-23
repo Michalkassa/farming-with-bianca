@@ -245,7 +245,7 @@ body {
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":false,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":548712,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 // export_web.sh swaps in a fresh id per build so browsers never reuse a cached old game pack.
-const BUILD_ID = '1795448660';
+const BUILD_ID = '1795448850';
 const MAIN_PACK = GODOT_CONFIG.executable + '.pck?v=' + BUILD_ID;
 GODOT_CONFIG.mainPack = MAIN_PACK;
 GODOT_CONFIG.fileSizes[MAIN_PACK] = GODOT_CONFIG.fileSizes[GODOT_CONFIG.executable + '.pck'];
@@ -318,6 +318,23 @@ const engine = new Engine(GODOT_CONFIG);
 		return;
 	}
 
+	// The page itself can be cached, so ask the server (bypassing the cache) which
+	// build is current; if it's newer than this page, reload under a fresh URL.
+	fetch('version.txt?t=' + Date.now(), { cache: 'no-store' })
+		.then((r) => (r.ok ? r.text() : BUILD_ID))
+		.catch(() => BUILD_ID)
+		.then((latest) => {
+			latest = latest.trim();
+			const url = new URL(window.location.href);
+			if (/^[0-9]+$/.test(latest) && latest !== BUILD_ID && url.searchParams.get('v') !== latest) {
+				url.searchParams.set('v', latest);
+				window.location.replace(url.toString());
+				return;
+			}
+			boot();
+		});
+
+	function boot() {
 	engine.startGame({
 		'onProgress': function (current, total) {
 			if (current > 0 && total > 0) {
@@ -330,6 +347,7 @@ const engine = new Engine(GODOT_CONFIG);
 			}
 		},
 	}).then(hideStatus, showFailure);
+	}
 }());
 		</script>
 	</body>
